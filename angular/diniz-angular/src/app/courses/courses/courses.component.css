@@ -1,5 +1,18 @@
-table {
-  width: 100%;
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.custom-toolbar {
+  background-color: #3786cf; /* Cor de azul suave, semelhante à cor do céu */
+  color: #fff; /* Cor do texto para contrastar com o fundo */
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
 }
 
 .loading-spinner {
