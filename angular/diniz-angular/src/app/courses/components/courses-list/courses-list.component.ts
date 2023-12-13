@@ -11,6 +11,7 @@ export class CoursesListComponent implements OnInit {
 
   @Input() courses: Course[] = [];
   @Output() add = new EventEmitter<boolean>();
+  @Output() edit = new EventEmitter<Course>();
 
   readonly displayedColumns = ['name', 'category', 'actions'];
 
@@ -21,6 +22,10 @@ export class CoursesListComponent implements OnInit {
 
   onAdd() {
     this.add.emit(true);
+  }
+
+  onEdit(course: Course) {
+    this.edit.emit(course);
   }
 
 }
