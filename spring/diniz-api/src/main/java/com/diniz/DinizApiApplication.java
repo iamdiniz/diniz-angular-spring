@@ -22,7 +22,7 @@ public class DinizApiApplication {
 
 			Course newCourse = new Course();
 			newCourse.setName("Angular");
-			newCourse.setCategory("front-end");
+			newCourse.setCategory("Front-end");
 
 			courseRepository.save(newCourse);
 		};
