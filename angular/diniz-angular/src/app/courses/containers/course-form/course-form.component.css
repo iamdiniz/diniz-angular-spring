@@ -20,7 +20,13 @@ mat-card {
 }
 
 .course-toolbar {
-  background-color: #1976D2; /* Atualize com a cor desejada */
-  color: white; /* Atualize com a cor desejada */
   margin-bottom: 1em;
+}
+
+.btn-space {
+  margin-left: 5px;
+}
+
+.actions-center {
+  justify-content: center;
 }

@@ -4,11 +4,6 @@ mat-card {
   text-align: center;
 }
 
-.custom-toolbar {
-  background-color: #3786cf;
-  color: #fff;
-}
-
 .column-flex {
   display: flex;
   flex-direction: column;

@@ -4,27 +4,9 @@
 }
 
 .action-colum {
-  flex: 0 0 127px;
+  flex: 0 0 125px;
 }
 
 .action-colum-header {
   flex: 0 0 120px;
-}
-
-.example-card {
-  max-width: 400px;
-  flex: 0 0 calc(48% - 16px); /* 48% de largura com algum espaço entre os cartões */
-  margin-bottom: 16px;
-  box-sizing: border-box;
-}
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-
-.mat-card-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }

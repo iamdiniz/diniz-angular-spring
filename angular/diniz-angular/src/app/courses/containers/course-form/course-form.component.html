@@ -1,5 +1,5 @@
 <mat-card class="course-card">
-  <mat-toolbar class="course-toolbar">Detalhes do Curso</mat-toolbar>
+  <mat-toolbar class="course-toolbar" color="primary">Detalhes do Curso</mat-toolbar>
 
   <mat-card-content>
     <form [formGroup]="form" class="min.width">
@@ -21,8 +21,8 @@
     </form>
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions class="actions-center">
     <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
-    <button mat-raised-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button (click)="onCancel()" class="btn-space">Cancelar</button>
   </mat-card-actions>
 </mat-card>
