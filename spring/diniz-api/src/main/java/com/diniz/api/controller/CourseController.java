@@ -16,29 +16,31 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diniz.domain.model.Course;
-import com.diniz.domain.repository.CourseRepository;
+import com.diniz.domain.service.CourseService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
 
 @Validated
 @RestController
 @RequestMapping("api/courses")
-@AllArgsConstructor
 public class CourseController {
 	
-	private final CourseRepository courseRepository;
+	private final CourseService courseService;
+	
+	public CourseController(CourseService courseService) {
+		this.courseService = courseService;
+	}
 
 	@GetMapping
 	public List<Course> findAll() {
-		return courseRepository.findAll();
+		return courseService.findAll();
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Course> findById(@PathVariable @NotNull @Positive Long id) {
-		return courseRepository.findById(id)
+		return courseService.findById(id)
 				.map(entityCaseExist -> ResponseEntity.ok().body(entityCaseExist))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -46,30 +48,23 @@ public class CourseController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Course create(@RequestBody @Valid Course newCourse) {
-		return courseRepository.save(newCourse);
+		return courseService.create(newCourse);
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Course> update(@PathVariable @NotNull @Positive Long id,
 			@RequestBody @Valid Course editCourse) {
-		return courseRepository.findById(id)
-				.map(entityCaseExist -> {
-					entityCaseExist.setName(editCourse.getName());
-					entityCaseExist.setCategory(editCourse.getCategory());
-					Course updatedCourse = courseRepository.save(entityCaseExist);
-					return ResponseEntity.ok().body(updatedCourse);
-				})
+		return courseService.update(id, editCourse)
+				.map(entityCaseExist -> ResponseEntity.ok().body(entityCaseExist))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable @NotNull @Positive Long id) {
-		return courseRepository.findById(id)
-				.map(entityCaseExist -> {
-					courseRepository.deleteById(id);
-					return ResponseEntity.noContent().<Void>build();
-				})
-				.orElse(ResponseEntity.notFound().build());
+		if (courseService.delete(id)) {
+			return ResponseEntity.noContent().<Void>build();
+		}
+			return ResponseEntity.notFound().build();
 	}
 
 }
