@@ -50,8 +50,8 @@ public class CourseController {
 	
 	@PutMapping("/{id}")
 	public Course update(@PathVariable @NotNull @Positive Long id,
-			@RequestBody @Valid Course editCourse) {
-		return courseService.update(id, editCourse);
+			@RequestBody @Valid Course editedCourse) {
+		return courseService.update(id, editedCourse);
 	}
 	
 	@DeleteMapping("/{id}")
