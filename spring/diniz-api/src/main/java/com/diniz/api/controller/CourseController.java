@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.diniz.domain.model.Course;
+import com.diniz.api.dto.CourseDTO;
 import com.diniz.domain.service.CourseService;
 
 import jakarta.validation.Valid;
@@ -33,24 +34,24 @@ public class CourseController {
 	}
 
 	@GetMapping
-	public List<Course> findAll() {
+	public @ResponseBody List<CourseDTO> findAll() {
 		return courseService.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Course findById(@PathVariable @NotNull @Positive Long id) {
+	public CourseDTO findById(@PathVariable @NotNull @Positive Long id) {
 		return courseService.findById(id);
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Course create(@RequestBody @Valid Course newCourse) {
+	public CourseDTO create(@RequestBody @Valid @NotNull CourseDTO newCourse) {
 		return courseService.create(newCourse);
 	}
 	
 	@PutMapping("/{id}")
-	public Course update(@PathVariable @NotNull @Positive Long id,
-			@RequestBody @Valid Course editedCourse) {
+	public CourseDTO update(@PathVariable @NotNull @Positive Long id,
+			@RequestBody @Valid @NotNull CourseDTO editedCourse) {
 		return courseService.update(id, editedCourse);
 	}
 	
