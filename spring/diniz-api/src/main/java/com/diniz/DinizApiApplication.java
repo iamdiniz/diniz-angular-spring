@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.diniz.domain.enums.Category;
 import com.diniz.domain.model.Course;
 import com.diniz.domain.repository.CourseRepository;
 
@@ -22,7 +23,7 @@ public class DinizApiApplication {
 
 			Course newCourse = new Course();
 			newCourse.setName("Angular");
-			newCourse.setCategory("Front-end");
+			newCourse.setCategory(Category.FRONT_END);
 
 			courseRepository.save(newCourse);
 		};

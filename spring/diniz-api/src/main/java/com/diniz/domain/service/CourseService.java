@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.diniz.api.dto.CourseDTO;
 import com.diniz.api.dto.mapper.CourseMapper;
+import com.diniz.domain.enums.Category;
 import com.diniz.domain.exception.RecordNotFoundException;
 import com.diniz.domain.repository.CourseRepository;
 
@@ -48,7 +49,7 @@ public class CourseService {
         return courseRepository.findById(id)
                 .map(entityCaseExist -> {
                     entityCaseExist.setName(course.name());
-                    entityCaseExist.setCategory(course.category());
+                    entityCaseExist.setCategory(Category.FRONT_END);
                     return courseMapper.toDTO(courseRepository.save(entityCaseExist));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
