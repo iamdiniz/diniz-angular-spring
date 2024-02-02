@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.diniz.domain.enums.Category;
 import com.diniz.domain.model.Course;
+import com.diniz.domain.model.Lesson;
 import com.diniz.domain.repository.CourseRepository;
 
 @SpringBootApplication
@@ -24,6 +25,12 @@ public class DinizApiApplication {
 			Course newCourse = new Course();
 			newCourse.setName("Angular");
 			newCourse.setCategory(Category.FRONT_END);
+			
+			Lesson newLesson = new Lesson();
+			newLesson.setName("Introdução");
+			newLesson.setYoutubeUrl("watch?v=1");
+			newLesson.setCourse(newCourse);
+			newCourse.getLessons().add(newLesson);
 
 			courseRepository.save(newCourse);
 		};
