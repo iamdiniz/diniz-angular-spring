@@ -31,6 +31,12 @@ public class DinizApiApplication {
 			newLesson.setYoutubeUrl("watch?v=1");
 			newLesson.setCourse(newCourse);
 			newCourse.getLessons().add(newLesson);
+			
+			Lesson newLesson2 = new Lesson();
+			newLesson2.setName("Angular");
+			newLesson2.setYoutubeUrl("watch?v=2");
+			newLesson2.setCourse(newCourse);
+			newCourse.getLessons().add(newLesson2);
 
 			courseRepository.save(newCourse);
 		};
