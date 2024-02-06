@@ -10,6 +10,7 @@ export const courseResolver: ResolveFn<any> = (route, state) => {
     _id: '',
     name: '',
     category: '',
+    lessons: []
   }
 
   if (route.params && route.params['id']) {
