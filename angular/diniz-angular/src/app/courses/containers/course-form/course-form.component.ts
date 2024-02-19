@@ -15,6 +15,8 @@ import { CoursesService } from '../../services/courses.service';
 })
 export class CourseFormComponent implements OnInit {
 
+  form!: FormGroup;
+
   constructor(private formBuilder: NonNullableFormBuilder,
     private service: CoursesService,
     private snackBar: MatSnackBar,
@@ -25,18 +27,16 @@ export class CourseFormComponent implements OnInit {
   ngOnInit(): void {
     const course: Course = this.route.snapshot.data['course'];
     this.form = this.formBuilder.group({
-       _id: ['course._id'],
-       name: ['course.name', [Validators.required,
+       _id: [course._id],
+       name: [course.name, [Validators.required,
        Validators.minLength(5),
        Validators.maxLength(100)]],
-       category: ['course.category', [Validators.required]],
+       category: [course.category, [Validators.required]],
        lessons: this.formBuilder.array(this.retrieveLessons(course))
       });
     console.log(this.form);
     console.log(this.form.value);
   }
-
-  form!: FormGroup;
 
   private retrieveLessons(course: Course) {
     const lessons = [];
@@ -58,6 +58,16 @@ export class CourseFormComponent implements OnInit {
 
   getLessonsFormArray() {
     return (<UntypedFormArray>this.form.get('lessons')).controls;
+  }
+
+  addNewLesson() {
+    const lessons = this.form.get('lessons') as UntypedFormArray;
+    lessons.push(this.createLesson());
+  }
+
+  removeLesson(index: number) {
+    const lessons = this.form.get('lessons') as UntypedFormArray;
+    lessons.removeAt(index);
   }
 
   onSubmit() {

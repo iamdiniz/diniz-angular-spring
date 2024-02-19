@@ -6,22 +6,22 @@
       <mat-form-field class="full-width">
         <input matInput placeholder="Nome" formControlName="name" #name />
         <mat-hint align="end">{{ name.value.length || 0 }} / 100</mat-hint>
-        <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage('name') }}</mat-error>
+        <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage("name") }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Categoria</mat-label>
         <mat-select  formControlName="category">
-          <mat-option value="null"></mat-option>
-          <mat-option value="Front-end">Front-end</mat-option>
-          <mat-option value="Back-end">Back-end</mat-option>
+          <mat-option value="null"> </mat-option>
+          <mat-option value="Front-end">Front-End</mat-option>
+          <mat-option value="Back-end">Back-End</mat-option>
         </mat-select>
-        <mat-error *ngIf="form.get('category')?.invalid">{{ getErrorMessage('category') }}</mat-error>
+        <mat-error *ngIf="form.get('category')?.invalid">{{ getErrorMessage("category") }}</mat-error>
       </mat-form-field>
 
       <mat-toolbar>
         <span>Aulas</span>
-        <button mat-icon-button color="primary">
+        <button mat-icon-button color="primary" (click)="addNewLesson()">
           <mat-icon aria-label="Adicionar uma nova aula">add</mat-icon>
         </button>
       </mat-toolbar>
@@ -43,6 +43,11 @@
               <span matPrefix>https://youtu.be/</span>
               <input matInput formControlName="youtubeUrl"/>
             </mat-form-field>
+          </td>
+          <td>
+            <button mat-icon-button color="warn" (click)="removeLesson(i)">
+              <mat-icon aria-label="Remover a aula">delete</mat-icon>
+            </button>
           </td>
         </tr>
       </table>
