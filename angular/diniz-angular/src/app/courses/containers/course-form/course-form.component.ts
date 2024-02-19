@@ -32,7 +32,7 @@ export class CourseFormComponent implements OnInit {
        Validators.minLength(5),
        Validators.maxLength(100)]],
        category: [course.category, [Validators.required]],
-       lessons: this.formBuilder.array(this.retrieveLessons(course))
+       lessons: this.formBuilder.array(this.retrieveLessons(course), Validators.required)
       });
     console.log(this.form);
     console.log(this.form.value);
@@ -51,8 +51,12 @@ export class CourseFormComponent implements OnInit {
   private createLesson(lesson: Lesson = {id: '', name: '', youtubeUrl: ''}) {
     return this.formBuilder.group({
       id: [lesson.id],
-      name: [lesson.name],
-      youtubeUrl: [lesson.youtubeUrl]
+      name: [lesson.name, [Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(100)]],
+      youtubeUrl: [lesson.youtubeUrl, [Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(11)]]
     });
   }
 
@@ -71,8 +75,12 @@ export class CourseFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.save(this.form.value)
+    if (this.form.valid) {
+      this.service.save(this.form.value)
     .subscribe(result => this.onSuccess(), error => this.onError());
+    } else {
+      alert('form inválido');
+    }
   }
 
   onCancel() {
@@ -106,6 +114,11 @@ export class CourseFormComponent implements OnInit {
     }
 
     return 'Campo inválido';
+  }
+
+  isFormArrayRequired() {
+    const lessons = this.form.get('lessons') as UntypedFormArray;
+    return !lessons.valid && lessons.hasError('required') && lessons.touched;
   }
 
 }
