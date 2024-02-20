@@ -120,5 +120,4 @@ export class CourseFormComponent implements OnInit {
     const lessons = this.form.get('lessons') as UntypedFormArray;
     return !lessons.valid && lessons.hasError('required') && lessons.touched;
   }
-
 }
