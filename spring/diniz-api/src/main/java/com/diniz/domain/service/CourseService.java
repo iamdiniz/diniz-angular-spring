@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import com.diniz.api.dto.CourseDTO;
 import com.diniz.api.dto.mapper.CourseMapper;
 import com.diniz.domain.exception.RecordNotFoundException;
+import com.diniz.domain.model.Course;
 import com.diniz.domain.repository.CourseRepository;
 
 import jakarta.validation.Valid;
@@ -43,11 +44,14 @@ public class CourseService {
 		return courseMapper.toDTO(courseRepository.save(courseMapper.toEntity(newCourse)));
 	}
 	
-	public CourseDTO update(@NotNull @Positive Long id, @Valid @NotNull CourseDTO course) {
+	public CourseDTO update(@NotNull @Positive Long id, @Valid @NotNull CourseDTO courseDTO) {
         return courseRepository.findById(id)
                 .map(entityCaseExist -> {
-                    entityCaseExist.setName(course.name());
-                    entityCaseExist.setCategory(courseMapper.convertCategoryValue(course.category()));
+                	Course course = courseMapper.toEntity(courseDTO);
+                    entityCaseExist.setName(courseDTO.name());
+                    entityCaseExist.setCategory(courseMapper.convertCategoryValue(courseDTO.category()));
+                    entityCaseExist.getLessons().clear();
+                    course.getLessons().forEach(lesson -> entityCaseExist.getLessons().add(lesson));
                     return courseMapper.toDTO(courseRepository.save(entityCaseExist));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
