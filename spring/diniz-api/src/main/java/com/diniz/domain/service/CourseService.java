@@ -51,7 +51,7 @@ public class CourseService {
                     entityCaseExist.setName(courseDTO.name());
                     entityCaseExist.setCategory(courseMapper.convertCategoryValue(courseDTO.category()));
                     entityCaseExist.getLessons().clear();
-                    course.getLessons().forEach(lesson -> entityCaseExist.getLessons().add(lesson));
+                    course.getLessons().forEach(entityCaseExist.getLessons()::add);
                     return courseMapper.toDTO(courseRepository.save(entityCaseExist));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
