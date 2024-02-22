@@ -22,24 +22,26 @@ public class DinizApiApplication {
 		return args -> {
 			courseRepository.deleteAll();
 
-			Course newCourse = new Course();
-			newCourse.setName("Angular");
-			newCourse.setCategory(Category.FRONT_END);
+			for (int i = 0; i < 20; i++) {
+				Course newCourse = new Course();
+				newCourse.setName("Angular " + i);
+				newCourse.setCategory(Category.FRONT_END);
+				
+				Lesson newLesson = new Lesson();
+				newLesson.setName("Introdução");
+				newLesson.setYoutubeUrl("1234567890");
+				newLesson.setCourse(newCourse);
+				newCourse.getLessons().add(newLesson);
+				
+				Lesson newLesson2 = new Lesson();
+				newLesson2.setName("Angular");
+				newLesson2.setYoutubeUrl("12345678910");
+				newLesson2.setCourse(newCourse);
+				newCourse.getLessons().add(newLesson2);
+				
+				courseRepository.save(newCourse);
+			}
 			
-			Lesson newLesson = new Lesson();
-			newLesson.setName("Introdução");
-			newLesson.setYoutubeUrl("1234567890");
-			newLesson.setCourse(newCourse);
-			newCourse.getLessons().add(newLesson);
-			
-			Lesson newLesson2 = new Lesson();
-			newLesson2.setName("Angular");
-			newLesson2.setYoutubeUrl("12345678910");
-			newLesson2.setCourse(newCourse);
-			newCourse.getLessons().add(newLesson2);
-
-			courseRepository.save(newCourse);
 		};
 	}
-
 }
