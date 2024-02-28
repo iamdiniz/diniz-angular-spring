@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 import com.diniz.domain.enums.Category;
 import com.diniz.domain.model.Course;
@@ -18,6 +19,7 @@ public class DinizApiApplication {
 	}
 	
 	@Bean
+	@Profile("dev")
 	CommandLineRunner initDataBase(CourseRepository courseRepository) {
 		return args -> {
 			courseRepository.deleteAll();
