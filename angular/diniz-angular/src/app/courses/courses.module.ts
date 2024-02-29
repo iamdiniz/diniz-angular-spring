@@ -11,18 +11,16 @@ import { CoursesComponent } from './containers/courses/courses.component';
 import { CoursesRoutingModule } from './courses-routing.module';
 
 @NgModule({
-  declarations: [
-    CoursesComponent,
-    CourseFormComponent,
-    CoursesListComponent
-  ],
-  imports: [
-    ReactiveFormsModule,
-    MatProgressSpinnerModule,
-    AppMaterialModule,
-    CommonModule,
-    CoursesRoutingModule,
-    SharedModule
-  ]
+    imports: [
+        ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        AppMaterialModule,
+        CommonModule,
+        CoursesRoutingModule,
+        SharedModule,
+        CoursesComponent,
+        CourseFormComponent,
+        CoursesListComponent
+    ]
 })
 export class CoursesModule { }
